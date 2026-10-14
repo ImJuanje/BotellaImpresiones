@@ -109,6 +109,47 @@ textarea{min-height:120px;resize:vertical}
 footer.site{padding:32px 0 44px;color:var(--muted);font-size:.95rem}
 footer.site .wrap{display:grid;gap:8px}
 
+/* Vídeo del banner */
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media video{width:100%;height:100%;object-fit:cover;display:block}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.82))}
+.hero.has-video::before{display:none}
+.hero.has-video{min-height:min(80svh,700px);display:flex;align-items:center}
+.hero.has-video .wrap{width:100%}
+.hero-ctl{position:absolute;z-index:2;right:max(18px,env(safe-area-inset-right,0px));bottom:16px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(0,0,0,.65);display:grid;place-items:center;cursor:pointer;padding:0}
+.hero-ctl:hover{background:var(--red)}
+
+/* Galería */
+.chips{display:flex;gap:8px;overflow-x:auto;margin:0 -18px 20px;padding:0 18px 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;min-height:44px;padding:0 18px;border:1px solid #444;border-radius:99px;background:#000;color:var(--text);font:500 .95rem "DM Sans",sans-serif;cursor:pointer}
+.chips button:hover{border-color:#fff}
+.chips button[aria-pressed="true"]{background:var(--red);border-color:var(--red);font-weight:700}
+.g-grid{columns:2;column-gap:10px}
+.g-item{position:relative;display:block;width:100%;margin:0 0 10px;padding:0;border:0;border-radius:10px;overflow:hidden;background:#161616;cursor:pointer;break-inside:avoid}
+.g-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.g-item:hover img{transform:scale(1.04)}
+.ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:12px;color:var(--muted);font-size:.85rem;background:repeating-linear-gradient(0deg,#0a0a0a 0 6px,#161616 6px 8px)}
+.play{position:absolute;right:10px;bottom:10px;width:44px;height:44px;border-radius:50%;background:var(--red);display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.6)}
+.g-foot{display:grid;justify-items:center;gap:10px;margin-top:20px}
+.g-foot .btn{width:auto;min-width:220px}
+.g-empty{color:var(--muted);text-align:center;padding:40px 0}
+#lb{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(0,0,0,.97);color:#fff}
+#lb[open]{display:grid;grid-template-rows:1fr auto}
+#lb::backdrop{background:#000}
+#lb-fig{margin:0;display:grid;place-items:center;min-height:0;padding:64px max(12px,env(safe-area-inset-right,0px)) 8px max(12px,env(safe-area-inset-left,0px));touch-action:pan-y}
+#lb-fig img,#lb-fig video{max-width:100%;max-height:calc(100dvh - 150px);object-fit:contain;border-radius:6px;background:#000}
+#lb-fig .ph{position:relative;inset:auto;width:min(100%,520px);border-radius:8px}
+.lb-info{text-align:center;padding:6px 16px calc(14px + env(safe-area-inset-bottom,0px));font-size:.95rem}
+.lb-info span{display:block;color:var(--muted);font-size:.85rem}
+#lb button{position:absolute;width:48px;height:48px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:1.7rem;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+#lb button:hover{background:var(--red)}
+.lb-x{top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px))}
+.lb-nav{top:50%;margin-top:-24px}
+.lb-nav.prev{left:max(6px,env(safe-area-inset-left,0px))}
+.lb-nav.next{right:max(6px,env(safe-area-inset-right,0px))}
+.lb-open{overflow:hidden}
+
 /* ===== Tablet ===== */
 @media(min-width:600px){
   .wrap{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
@@ -145,7 +186,10 @@ footer.site .wrap{display:grid;gap:8px}
   .reviews{grid-template-columns:repeat(3,1fr)}
   .contact{grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-btn span{transition:none}}
+@media(min-width:600px){.g-grid{columns:3;column-gap:14px}.g-item{margin-bottom:14px}.chips{margin:0 0 24px;padding:0;flex-wrap:wrap;overflow:visible}}
+@media(min-width:960px){.g-grid{columns:4}}
+@media(min-width:860px){.hero.has-video .hero-media::after{background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.35))}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-btn span,.g-item img{transition:none}}
 </style>
 </head>
 <body>
@@ -156,6 +200,7 @@ footer.site .wrap{display:grid;gap:8px}
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú"><span></span><span></span><span></span></button>
     <nav id="nav" aria-label="Principal">
       <a href="#catalogo">Catálogo</a>
+      <a href="#galeria">Galería</a>
       <a href="#como">Cómo funciona</a>
       <a href="#empresas">Empresas</a>
       <a href="#resenas">Reseñas</a>
@@ -166,7 +211,8 @@ footer.site .wrap{display:grid;gap:8px}
 
 <main id="top">
 
-  <section class="hero">
+  <section class="hero" id="hero">
+    <div class="hero-media" id="hero-media" aria-hidden="true"></div>
     <div class="wrap">
       <h1>Botella<br><em>impresiones</em></h1>
       <p>Impresión 3D a medida: figuras, llaveros personalizados, piezas útiles y pedidos para empresas.</p>
@@ -175,6 +221,7 @@ footer.site .wrap{display:grid;gap:8px}
         <a class="btn ghost" href="#contacto">Pedir presupuesto</a>
       </div>
     </div>
+    <button class="hero-ctl" id="hero-ctl" type="button" hidden aria-label="Pausar vídeo"></button>
   </section>
 
   <section id="catalogo">
@@ -217,6 +264,30 @@ footer.site .wrap{display:grid;gap:8px}
 
       </div>
       <p class="more">¿No ves lo que buscas? <a href="#contacto" data-item="una pieza a medida (te cuento la idea)">Cuéntanos tu idea</a> y la imprimimos.</p>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="wrap">
+      <div class="head">
+        <h2>Galería</h2>
+        <p>Trabajos reales, piezas terminadas y el proceso de impresión.</p>
+      </div>
+      <div class="chips" id="g-chips" role="group" aria-label="Filtrar la galería">
+        <button type="button" data-c="todo" aria-pressed="true">Todo</button>
+        <button type="button" data-c="armas" aria-pressed="false">Mascotas</button>
+        <button type="button" data-c="detalles" aria-pressed="false">Llaveros</button>
+        <!-- CATEGORIAS DE LA GALERIA
+        <button type="button" data-c="hogar" aria-pressed="false">Hogar</button>
+        <button type="button" data-c="empresas" aria-pressed="false">Empresas</button>
+        <button type="button" data-c="videos" aria-pressed="false">Vídeos</button>-->
+      </div>
+      <div class="g-grid" id="g-grid"></div>
+      <p class="g-empty" id="g-empty" hidden>Todavía no hay nada en esta categoría.</p>
+      <div class="g-foot">
+        <button class="btn ghost" id="g-more" type="button">Ver más</button>
+        <p class="note" id="g-count" aria-live="polite"></p>
+      </div>
     </div>
   </section>
 
@@ -299,9 +370,165 @@ footer.site .wrap{display:grid;gap:8px}
   </div>
 </footer>
 
+<dialog id="lb" aria-label="Galería ampliada">
+  <button class="lb-x" type="button" data-a="x" aria-label="Cerrar">&times;</button>
+  <button class="lb-nav prev" type="button" data-a="p" aria-label="Anterior">&lsaquo;</button>
+  <figure id="lb-fig"></figure>
+  <button class="lb-nav next" type="button" data-a="n" aria-label="Siguiente">&rsaquo;</button>
+  <div class="lb-info"><p id="lb-cap" style="margin:0"></p><span id="lb-count"></span></div>
+</dialog>
+
 <script>
 // Cambia aquí el número (con prefijo país, sin + ni espacios) antes de compartir la web
 var WHATSAPP = "34600000000";
+
+var $ = function(id){ return document.getElementById(id); };
+
+// ======== MULTIMEDIA: aquí se cambian el vídeo del banner y las fotos/vídeos de la galería ========
+// Vídeo del banner (solo, sin sonido, en bucle). Ideal: MP4 H.264, 720p, 6-10 s, menos de 4 MB.
+var HERO_VIDEO = { src: "./sources/banner.mp4", poster: "" };
+// Galería · t: "img" o "vid" · cat: mascotas | llaveros | hogar | empresas · r: proporción ancho/alto
+// src: archivo grande · thumb: miniatura ligera (opcional) · poster: portada del vídeo (opcional)
+// Los elementos sin src se ven como hueco de ejemplo.
+var MEDIA = [
+  {t:"img",cat:"armas",r:"3/4",alt:"HACHA DE GUERRA", src:"./sources/ARMA1.jpg"},
+  {t:"img",cat:"armas",r:"16/9",alt:"ARMADURA PECHO Y HOMBROS", src:"./sources/ARMA2.jpg"},
+  {t:"img",cat:"detalles",r:"9/16",alt:"CASCO CON CUERNOS", src:"./sources/DETALLE1.jpg"},
+  {t:"img",cat:"detalles",r:"3/4",alt:"BARCO ONE PIECE", src:"./sources/DETALLE2.jpg"},
+  {t:"img",cat:"armas",r:"1/1",alt:"ESPADA CON FUNDA", src:"./sources/ARMA3.jpg"},
+  {t:"img",cat:"armas",r:"3/4",alt:"ESPADAS DOBLES", src:"./sources/ARMA4.jpg"},
+  {t:"img",cat:"detalles",r:"16/9",alt:"ARMADURA HOMBRO, ANTEBRAZO", src:"./sources/DETALLE3.jpg"},
+  {t:"img",cat:"armas",r:"3/4",alt:"ESPADAS DOBLES 2", src:"./sources/ARMA5.jpg"}
+];
+
+// ======== Vídeo del banner ========
+(function(){
+  if(!HERO_VIDEO.src) return;
+  var hero = $("hero"), box = $("hero-media"), btn = $("hero-ctl");
+  var v = document.createElement("video");
+  v.muted = true; v.loop = true; v.playsInline = true; v.preload = "metadata";
+  v.setAttribute("muted",""); v.setAttribute("playsinline","");
+  if(HERO_VIDEO.poster) v.poster = HERO_VIDEO.poster;
+  v.src = HERO_VIDEO.src;
+  box.appendChild(v); hero.classList.add("has-video"); btn.hidden = false;
+
+  var saver = navigator.connection && navigator.connection.saveData;
+  var want = !(matchMedia("(prefers-reduced-motion: reduce)").matches || saver), visible = true;
+  var ICON = {
+    pause:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="#fff"/></svg>',
+    play:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>'
+  };
+  function ui(){ btn.innerHTML = want ? ICON.pause : ICON.play; btn.setAttribute("aria-label", want ? "Pausar vídeo" : "Reproducir vídeo"); }
+  function sync(){
+    if(want && visible && !document.hidden){
+      var p = v.play(); if(p && p.catch) p.catch(function(){ want = false; ui(); });
+    } else v.pause();
+  }
+  btn.addEventListener("click", function(){ want = !want; ui(); sync(); });
+  document.addEventListener("visibilitychange", sync);
+  if("IntersectionObserver" in window) new IntersectionObserver(function(e){ visible = e[0].isIntersecting; sync(); }, {threshold:.1}).observe(hero);
+  ui(); sync();
+})();
+
+// ======== Galería ========
+(function(){
+  var BATCH = 12, items = [], shown = 0, cat = "todo", cur = 0, opener = null, pushed = false;
+  var grid = $("g-grid"), moreBtn = $("g-more"), count = $("g-count"), empty = $("g-empty"), chips = $("g-chips");
+  var dlg = $("lb"), fig = $("lb-fig"), cap = $("lb-cap"), num = $("lb-count"), io = null;
+
+  function ph(m){ var d = document.createElement("div"); d.className = "ph"; d.textContent = m.alt; return d; }
+
+  function tile(m, i){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "g-item"; b.dataset.i = i; b.style.aspectRatio = m.r;
+    b.setAttribute("aria-label", (m.t === "vid" ? "Reproducir vídeo: " : "Ampliar foto: ") + m.alt);
+    var s = m.t === "vid" ? m.poster : (m.thumb || m.src);
+    if(s){ var im = new Image(); im.loading = "lazy"; im.decoding = "async"; im.alt = ""; im.src = s; b.appendChild(im); }
+    else b.appendChild(ph(m));
+    if(m.t === "vid"){
+      var p = document.createElement("span"); p.className = "play";
+      p.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>';
+      b.appendChild(p);
+    }
+    return b;
+  }
+
+  function status(){
+    moreBtn.hidden = shown >= items.length;
+    count.textContent = items.length ? "Mostrando " + shown + " de " + items.length : "";
+    empty.hidden = items.length > 0;
+  }
+  function more(){
+    var end = Math.min(shown + BATCH, items.length), f = document.createDocumentFragment();
+    for(; shown < end; shown++) f.appendChild(tile(items[shown], shown));
+    grid.appendChild(f); status();
+    if(io && !moreBtn.hidden){ io.unobserve(moreBtn); io.observe(moreBtn); }
+  }
+  function reset(){
+    items = MEDIA.filter(function(m){ return cat === "todo" || (cat === "videos" ? m.t === "vid" : m.cat === cat); });
+    grid.textContent = ""; shown = 0; more();
+  }
+
+  if("IntersectionObserver" in window){
+    io = new IntersectionObserver(function(e){ if(e[0].isIntersecting && !moreBtn.hidden) more(); }, {rootMargin:"800px 0px"});
+    io.observe(moreBtn);
+  }
+  moreBtn.addEventListener("click", more);
+  chips.addEventListener("click", function(e){
+    var b = e.target.closest("button[data-c]"); if(!b) return;
+    cat = b.dataset.c;
+    chips.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", x === b); });
+    reset();
+  });
+
+  // --- Visor ---
+  function stop(){ var v = fig.querySelector("video"); if(v){ v.pause(); v.removeAttribute("src"); v.load(); } }
+  function media(m){
+    if(!m.src){ var d = ph(m); d.style.aspectRatio = m.r; return d; }
+    if(m.t === "vid"){
+      var v = document.createElement("video");
+      v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = "metadata";
+      if(m.poster) v.poster = m.poster;
+      v.src = m.src; return v;
+    }
+    var im = new Image(); im.decoding = "async"; im.alt = m.alt; im.src = m.src; return im;
+  }
+  function show(i){
+    var n = items.length; cur = (i + n) % n;
+    var m = items[cur]; stop(); fig.textContent = ""; fig.appendChild(media(m));
+    cap.textContent = m.alt; num.textContent = (cur + 1) + " / " + n;
+    [cur + 1, cur - 1].forEach(function(k){ var x = items[(k + n) % n]; if(x && x.t === "img" && x.src) new Image().src = x.src; });
+  }
+  grid.addEventListener("click", function(e){
+    var b = e.target.closest(".g-item"); if(!b) return;
+    opener = b; show(+b.dataset.i);
+    if(!dlg.open) dlg.showModal();
+    document.documentElement.classList.add("lb-open");
+    try{ history.pushState({lb:1}, ""); pushed = true; }catch(err){}
+  });
+  dlg.addEventListener("close", function(){
+    stop(); fig.textContent = ""; document.documentElement.classList.remove("lb-open");
+    if(opener) opener.focus();
+    if(pushed){ pushed = false; try{ history.back(); }catch(err){} }
+  });
+  window.addEventListener("popstate", function(){ if(dlg.open){ pushed = false; dlg.close(); } });
+  dlg.addEventListener("click", function(e){
+    var a = e.target.closest("button"); a = a ? a.dataset.a : (e.target === dlg || e.target === fig ? "x" : null);
+    if(a === "x") dlg.close(); else if(a === "p") show(cur - 1); else if(a === "n") show(cur + 1);
+  });
+  dlg.addEventListener("keydown", function(e){
+    if(e.key === "ArrowLeft") show(cur - 1); else if(e.key === "ArrowRight") show(cur + 1);
+  });
+  var x0 = null;
+  fig.addEventListener("pointerdown", function(e){ x0 = e.target.tagName === "VIDEO" ? null : e.clientX; });
+  fig.addEventListener("pointerup", function(e){
+    if(x0 === null) return; var d = e.clientX - x0; x0 = null;
+    if(Math.abs(d) > 50) show(cur + (d < 0 ? 1 : -1));
+  });
+  fig.addEventListener("pointercancel", function(){ x0 = null; });
+
+  reset();
+})();
 
 (function(){
   var btn = document.getElementById("menu-btn"), nav = document.getElementById("nav");
