@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Botella impresiones · Impresión 3D a medida</title>
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Base: móvil primero ===== */
+:root{--bg:#000;--surface:#121212;--line:#2a2a2a;--text:#f4f4f4;--muted:#a8a8a8;--red:#e10600;--red-hi:#ff2a1f;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(68px + env(safe-area-inset-top,0px))}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.6 "DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+h1,h2,h3{font-family:"Archivo Black","Arial Black",Impact,sans-serif;font-weight:400;line-height:1.05;margin:0}
+a{color:inherit}
+img,svg{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:3px solid var(--red-hi);outline-offset:3px}
+
+.btn{display:flex;align-items:center;justify-content:center;min-height:50px;border:2px solid var(--red);background:var(--red);color:#fff;padding:12px 24px;border-radius:8px;font:700 1rem "DM Sans",sans-serif;text-decoration:none;text-align:center;cursor:pointer;width:100%}
+.btn:hover{background:var(--red-hi);border-color:var(--red-hi)}
+.btn.ghost{background:#000;color:var(--text);border-color:#fff}
+.btn.ghost:hover{background:#fff;color:#000}
+
+/* Cabecera + menú móvil */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#000;border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:"Archivo Black",sans-serif;text-decoration:none;font-size:1.05rem}
+.logo span{color:var(--red)}
+.menu-btn{width:48px;height:48px;margin-right:-10px;background:none;border:0;cursor:pointer;display:grid;place-content:center;gap:5px}
+.menu-btn span{display:block;width:24px;height:2px;background:#fff;transition:transform .2s,opacity .2s}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+nav{display:none;position:absolute;top:100%;left:0;right:0;background:#000;border-bottom:1px solid var(--line);padding:8px max(18px,env(safe-area-inset-right,0px)) 20px max(18px,env(safe-area-inset-left,0px));flex-direction:column;gap:2px}
+nav.open{display:flex}
+nav a{display:flex;align-items:center;min-height:52px;text-decoration:none;color:var(--text);font-size:1.1rem;border-bottom:1px solid var(--line)}
+nav a.cta-s{margin-top:14px;border:0;justify-content:center;background:var(--red);border-radius:8px;font-weight:700}
+
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.head{margin-bottom:28px}
+.head h2{font-size:clamp(1.8rem,8vw,3rem)}
+.head p{color:var(--muted);margin:12px 0 0;max-width:38rem}
+
+/* Portada */
+.hero{position:relative;overflow:hidden;padding:44px 0 56px}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 9px,rgba(225,6,0,.45) 9px 11px);-webkit-mask-image:linear-gradient(180deg,transparent 45%,#000 100%);mask-image:linear-gradient(180deg,transparent 45%,#000 100%)}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(2.5rem,13vw,7rem)}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p{max-width:32rem;font-size:1.1rem;color:#d8d8d8;margin:20px 0 28px}
+.btns{display:grid;gap:12px}
+
+/* Catálogo */
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.art{aspect-ratio:16/9;display:grid;place-items:center;background:repeating-linear-gradient(0deg,#0a0a0a 0 6px,#161616 6px 8px)}
+.art svg{height:80%;width:auto}
+.card .body{padding:16px 16px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{font-size:1.15rem}
+.card p{margin:0;color:var(--muted);font-size:.97rem}
+.card .ask{display:inline-flex;align-items:center;min-height:48px;margin-top:auto;font-weight:700;color:var(--red-hi);text-decoration:none}
+.card .ask:hover{text-decoration:underline}
+.more{margin:24px 0 0;color:var(--muted)}
+.more a{color:var(--text);font-weight:700}
+
+/* Cómo funciona */
+.steps{display:grid;grid-template-columns:1fr;gap:24px;counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:s;border-top:4px solid var(--red);padding-top:14px}
+.steps li::before{content:counter(s);font-family:"Archivo Black",sans-serif;font-size:2.2rem;color:var(--red-hi);display:block;line-height:1;margin-bottom:8px}
+.steps h3{font-size:1.2rem;margin-bottom:6px}
+.steps p{margin:0;color:var(--muted)}
+
+/* Empresas */
+.company{background:var(--surface)}
+.company .wrap{display:grid;grid-template-columns:1fr;gap:28px}
+.company .head{margin:0}
+.company .btn{margin-top:24px}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.list li{padding:14px 16px;background:#000;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:0 8px 8px 0}
+.list strong{display:block}
+.list span{color:var(--muted);font-size:.95rem}
+
+/* Reseñas */
+.reviews{display:grid;grid-template-columns:1fr;gap:16px}
+blockquote{margin:0;background:var(--surface);border-left:4px solid var(--red);border-radius:0 12px 12px 0;padding:20px}
+blockquote p{margin:0 0 12px}
+blockquote cite{font-style:normal;color:var(--muted);font-size:.92rem}
+.stars{color:var(--red-hi);letter-spacing:2px;margin-bottom:6px}
+
+/* Contacto */
+.contact{display:grid;grid-template-columns:1fr;gap:28px}
+.contact .head{margin:0}
+.direct{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:4px}
+.direct li{min-height:44px;display:flex;align-items:center;gap:6px}
+.direct a{font-weight:700}
+form{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:16px}
+label{display:grid;gap:6px;font-weight:500;font-size:.95rem}
+input,select,textarea{font:inherit;font-size:16px;color:var(--text);background:#000;border:1px solid #444;border-radius:8px;padding:12px;width:100%;min-height:48px}
+input:focus,select:focus,textarea:focus{border-color:var(--red-hi);outline:none;box-shadow:0 0 0 3px rgba(255,42,31,.35)}
+textarea{min-height:120px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr;gap:16px}
+[hidden]{display:none!important}
+.note{font-size:.88rem;color:var(--muted);margin:0}
+
+footer.site{padding:32px 0 44px;color:var(--muted);font-size:.95rem}
+footer.site .wrap{display:grid;gap:8px}
+
+/* ===== Tablet ===== */
+@media(min-width:600px){
+  .wrap{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+  .btns{display:flex}
+  .btn{width:auto}
+  .btns .btn{min-width:200px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .row{grid-template-columns:1fr 1fr}
+  form{padding:24px}
+  .reviews{grid-template-columns:repeat(2,1fr)}
+  footer.site .wrap{display:flex;justify-content:space-between}
+}
+@media(min-width:720px){
+  section{padding:80px 0}
+  .head{margin-bottom:36px}
+  .hero{padding:72px 0 88px}
+  .steps{grid-template-columns:repeat(3,1fr);gap:24px}
+}
+
+/* ===== Escritorio ===== */
+@media(min-width:860px){
+  html{scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+  .bar{height:68px}
+  .menu-btn{display:none}
+  nav{display:flex;position:static;flex-direction:row;align-items:center;gap:26px;padding:0;border:0;background:none}
+  nav a{min-height:0;border:0;font-size:.95rem;color:var(--muted)}
+  nav a:hover{color:var(--text)}
+  nav a.cta-s{margin:0;color:#fff;padding:10px 18px}
+  .hero::before{-webkit-mask-image:linear-gradient(100deg,transparent 40%,#000 100%);mask-image:linear-gradient(100deg,transparent 40%,#000 100%)}
+  .hero h1{font-size:clamp(4rem,9vw,7rem)}
+  .hero p{font-size:1.2rem}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .company .wrap{grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+  .reviews{grid-template-columns:repeat(3,1fr)}
+  .contact{grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-btn span{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top">Botella<span>.</span>impresiones</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    <nav id="nav" aria-label="Principal">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#empresas">Empresas</a>
+      <a href="#resenas">Reseñas</a>
+      <a class="cta-s" href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Botella<br><em>impresiones</em></h1>
+      <p>Impresión 3D a medida: figuras, llaveros personalizados, piezas útiles y pedidos para empresas.</p>
+      <div class="btns">
+        <a class="btn" href="#catalogo">Ver catálogo</a>
+        <a class="btn ghost" href="#contacto">Pedir presupuesto</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <div class="wrap">
+      <div class="head">
+        <h2>Catálogo</h2>
+        <p>Ejemplos de lo que podemos imprimir. Todo se hace por encargo: tú eliges tamaño y color.</p>
+      </div>
+      <div class="grid">
+
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="70" rx="28" ry="20" fill="#e10600"/><ellipse cx="28" cy="34" rx="8" ry="15" fill="#fff" transform="rotate(18 28 34)"/><ellipse cx="72" cy="34" rx="8" ry="15" fill="#fff" transform="rotate(-18 72 34)"/><circle cx="50" cy="40" r="19" fill="#e10600"/><circle cx="43" cy="37" r="3" fill="#000"/><circle cx="57" cy="37" r="3" fill="#000"/><ellipse cx="50" cy="47" rx="5" ry="4" fill="#000"/></svg></div>
+          <div class="body"><h3>Tu mascota a escala</h3><p>Una figura de tu perro, gato o lo que tengas en casa, hecha a partir de sus fotos.</p><a class="ask" href="#contacto" data-item="una figura de mi mascota a escala">Pedir mi figura</a></div>
+        </article>
+
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="12" y="28" width="76" height="44" rx="10" fill="#fff"/><circle cx="24" cy="40" r="4" fill="#000"/><text x="56" y="61" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif" font-size="24" fill="#e10600">ANA</text></svg></div>
+          <div class="body"><h3>Llaveros personalizados</h3><p>Con tu nombre, una frase, un logo o un dibujo. Elige forma y color.</p><a class="ask" href="#contacto" data-item="llaveros personalizados">Pedir el mío</a></div>
+        </article>
+
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="14" y="78" width="72" height="8" rx="3" fill="#fff"/><path d="M36 78l8-48" stroke="#e10600" stroke-width="8" stroke-linecap="round"/><rect x="40" y="14" width="30" height="54" rx="5" fill="#000" stroke="#e10600" stroke-width="4" transform="rotate(12 55 41)"/></svg></div>
+          <div class="body"><h3>Soporte para móvil</h3><p>Para la mesa, la cocina o la mesilla. Se adapta al tamaño de tu móvil.</p><a class="ask" href="#contacto" data-item="un soporte para móvil">Pedir este soporte</a></div>
+        </article>
+
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="24,52 76,52 68,90 32,90" fill="#e10600"/><rect x="20" y="46" width="60" height="8" rx="3" fill="#fff"/><ellipse cx="40" cy="30" rx="8" ry="16" fill="#fff" transform="rotate(-25 40 30)"/><ellipse cx="60" cy="30" rx="8" ry="16" fill="#fff" transform="rotate(25 60 30)"/><ellipse cx="50" cy="24" rx="7" ry="17" fill="#fff"/></svg></div>
+          <div class="body"><h3>Macetas con diseño</h3><p>Formas geométricas y detalles que no encuentras en una tienda de jardinería.</p><a class="ask" href="#contacto" data-item="macetas con diseño">Pedir macetas</a></div>
+        </article>
+
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="18" y="86" width="64" height="8" rx="3" fill="#fff"/><path d="M34 86c2-22 6-30 16-34-8-3-12-9-12-17a12 12 0 0124 0c0 8-4 14-12 17 10 4 14 12 16 34z" fill="#e10600"/></svg></div>
+          <div class="body"><h3>Figuras y miniaturas</h3><p>Piezas de colección, juegos de mesa o decoración. Tú aportas la idea o el modelo.</p><a class="ask" href="#contacto" data-item="una figura o miniatura">Pedir una figura</a></div>
+        </article>
+
+        <article class="card">
+          <div class="art"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="24" y="44" width="52" height="46" rx="6" fill="#e10600"/><rect x="30" y="52" width="40" height="4" fill="#000"/><rect x="30" y="62" width="40" height="4" fill="#000"/><rect x="34" y="14" width="7" height="34" rx="3" fill="#fff" transform="rotate(-10 37 31)"/><rect x="46" y="10" width="7" height="38" rx="3" fill="#fff"/><rect x="58" y="14" width="7" height="34" rx="3" fill="#fff" transform="rotate(10 61 31)"/></svg></div>
+          <div class="body"><h3>Organizadores de escritorio</h3><p>Portalápices, soportes para cables y cajones a la medida de tu mesa.</p><a class="ask" href="#contacto" data-item="un organizador de escritorio">Pedir este organizador</a></div>
+        </article>
+
+      </div>
+      <p class="more">¿No ves lo que buscas? <a href="#contacto" data-item="una pieza a medida (te cuento la idea)">Cuéntanos tu idea</a> y la imprimimos.</p>
+    </div>
+  </section>
+
+  <section id="como">
+    <div class="wrap">
+      <div class="head"><h2>Cómo funciona</h2></div>
+      <ol class="steps">
+        <li><h3>Cuéntanos la idea</h3><p>Una foto, un dibujo, unas medidas o simplemente lo que tienes en la cabeza.</p></li>
+        <li><h3>Te mandamos propuesta</h3><p>Te decimos qué se puede hacer, cuánto cuesta y cuándo lo tienes.</p></li>
+        <li><h3>Lo imprimimos</h3><p>Fabricamos tu pieza y te la entregamos lista para usar.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="empresas" class="company">
+    <div class="wrap">
+      <div class="head">
+        <h2>Impresiones para empresas</h2>
+        <p>Series cortas y personalizadas para tiendas, clubes, gimnasios y negocios que quieren algo distinto al merchandising de catálogo.</p>
+        <a class="btn" href="#contacto" data-who="empresa">Pedir presupuesto de empresa</a>
+      </div>
+      <ul class="list">
+        <li><strong>Llaveros y regalos con vuestro logo</strong><span>Para clientes, eventos o campañas.</span></li>
+        <li><strong>Premios y detalles para eventos</strong><span>Torneos, ferias o celebraciones.</span></li>
+        <li><strong>Accesorios y soportes para el local</strong><span>Piezas útiles a la medida de vuestro espacio.</span></li>
+        <li><strong>Prototipos antes de fabricar en serie</strong><span>Prueba tu idea antes de invertir.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="resenas">
+    <div class="wrap">
+      <div class="head"><h2>Reseñas</h2><p>Lo que dicen quienes ya han probado las piezas.</p></div>
+      <!-- Sustituir por reseñas reales de clientes -->
+      <div class="reviews">
+        <blockquote><div class="stars" aria-label="5 de 5 estrellas">★★★★★</div><p>Los llaveros quedaron mejor de lo que esperaba. Acabado limpio y el color justo.</p><cite>Nombre del cliente</cite></blockquote>
+        <blockquote><div class="stars" aria-label="5 de 5 estrellas">★★★★★</div><p>Le pedí uno con mi nombre y llegó rápido. Ya me han pedido tres más.</p><cite>Nombre del cliente</cite></blockquote>
+        <blockquote><div class="stars" aria-label="5 de 5 estrellas">★★★★★</div><p>Trato cercano y se adaptaron a lo que necesitábamos para el evento.</p><cite>Nombre del cliente</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" style="border-bottom:0">
+    <div class="wrap contact">
+      <div class="head">
+        <h2>Cuéntanos qué necesitas</h2>
+        <p>Rellena el formulario y te respondemos con una propuesta y un precio. Sirve tanto para encargos personales como para empresas.</p>
+        <ul class="direct">
+          <li>WhatsApp: <a id="wa-link" href="#">escríbenos</a></li>
+          <li>Instagram: <a href="#">@botellaimpresiones</a></li>
+        </ul>
+      </div>
+      <form id="f">
+        <div class="row">
+          <label>Nombre<input name="nombre" required autocomplete="name"></label>
+          <label>Soy
+            <select name="who" id="who">
+              <option value="particular">Particular</option>
+              <option value="empresa">Empresa o club</option>
+            </select>
+          </label>
+        </div>
+        <label id="emp" hidden>Nombre de la empresa o club<input name="empresa"></label>
+        <div class="row">
+          <label>Cantidad<input name="cantidad" type="number" min="1" value="1"></label>
+          <label>Color preferido<input name="color" placeholder="Rojo, negro…"></label>
+        </div>
+        <label>Qué quieres que imprimamos<textarea name="detalle" id="detalle" required placeholder="Tamaño, para qué lo quieres, si tienes una imagen o medidas…"></textarea></label>
+        <button class="btn" type="submit">Enviar por WhatsApp</button>
+        <p class="note">Se abre WhatsApp con tu mensaje listo para enviar.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div><strong style="color:var(--text)">Botella impresiones</strong> · Impresión 3D a medida</div>
+    <div>© Botella impresiones</div>
+  </div>
+</footer>
+
+<script>
+// Cambia aquí el número (con prefijo país, sin + ni espacios) antes de compartir la web
+var WHATSAPP = "34600000000";
+
+(function(){
+  var btn = document.getElementById("menu-btn"), nav = document.getElementById("nav");
+  function menu(open){ nav.classList.toggle("open", open); btn.setAttribute("aria-expanded", open); btn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú"); }
+  btn.addEventListener("click", function(){ menu(!nav.classList.contains("open")); });
+  nav.addEventListener("click", function(e){ if(e.target.tagName === "A") menu(false); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") menu(false); });
+  window.addEventListener("resize", function(){ if(window.innerWidth >= 860) menu(false); });
+})();
+(function(){
+  var f = document.getElementById("f"), who = document.getElementById("who"), emp = document.getElementById("emp"), det = document.getElementById("detalle");
+  document.getElementById("wa-link").href = "https://wa.me/" + WHATSAPP;
+
+  function sync(){ emp.hidden = who.value !== "empresa"; }
+  who.addEventListener("change", sync); sync();
+
+  document.querySelectorAll("[data-item]").forEach(function(a){
+    a.addEventListener("click", function(){ det.value = "Quiero " + a.dataset.item + "."; });
+  });
+  document.querySelectorAll("[data-who]").forEach(function(a){
+    a.addEventListener("click", function(){ who.value = a.dataset.who; sync(); });
+  });
+
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    var d = new FormData(f), t = ["Hola, soy " + d.get("nombre") + (d.get("who") === "empresa" && d.get("empresa") ? " de " + d.get("empresa") : "") + "."];
+    t.push("Quiero pedir información sobre: " + d.get("detalle"));
+    if (d.get("cantidad")) t.push("Cantidad: " + d.get("cantidad"));
+    if (d.get("color")) t.push("Color: " + d.get("color"));
+    window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(t.join("\n")), "_blank", "noopener");
+  });
+})();
+</script>
+</body>
+</html>
