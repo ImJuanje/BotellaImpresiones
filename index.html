@@ -134,21 +134,66 @@ footer.site .wrap{display:grid;gap:8px}
 .g-foot{display:grid;justify-items:center;gap:10px;margin-top:20px}
 .g-foot .btn{width:auto;min-width:220px}
 .g-empty{color:var(--muted);text-align:center;padding:40px 0}
-#lb{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(0,0,0,.97);color:#fff}
-#lb[open]{display:grid;grid-template-rows:1fr auto}
-#lb::backdrop{background:#000}
-#lb-fig{margin:0;display:grid;place-items:center;min-height:0;padding:64px max(12px,env(safe-area-inset-right,0px)) 8px max(12px,env(safe-area-inset-left,0px));touch-action:pan-y}
-#lb-fig img,#lb-fig video{max-width:100%;max-height:calc(100dvh - 150px);object-fit:contain;border-radius:6px;background:#000}
-#lb-fig .ph{position:relative;inset:auto;width:min(100%,520px);border-radius:8px}
-.lb-info{text-align:center;padding:6px 16px calc(14px + env(safe-area-inset-bottom,0px));font-size:.95rem}
-.lb-info span{display:block;color:var(--muted);font-size:.85rem}
-#lb button{position:absolute;width:48px;height:48px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:1.7rem;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
-#lb button:hover{background:var(--red)}
-.lb-x{top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px))}
-.lb-nav{top:50%;margin-top:-24px}
-.lb-nav.prev{left:max(6px,env(safe-area-inset-left,0px))}
-.lb-nav.next{right:max(6px,env(safe-area-inset-right,0px))}
+.cnt{position:absolute;top:8px;right:8px;padding:2px 9px;border-radius:99px;background:rgba(0,0,0,.72);font-size:.75rem;font-weight:700}
+/* Modal de pieza */
+#lb{width:min(680px,calc(100% - 20px));max-height:calc(100dvh - 20px);margin:auto;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--text);overflow:hidden}
+#lb[open]{display:flex;flex-direction:column}
+#lb::backdrop{background:rgba(0,0,0,.85)}
+.md-scroll{overflow-y:auto;overscroll-behavior:contain;min-height:0}
+.md-stage{position:relative;background:#000;display:grid;place-items:center;padding:60px 14px 14px;min-height:240px;touch-action:pan-y}
+#md-fig{margin:0;display:grid;place-items:center}
+#md-fig img,#md-fig video{max-width:100%;max-height:min(54dvh,520px);object-fit:contain;border-radius:6px;background:#000}
+#md-fig .ph{position:relative;inset:auto;width:min(100%,360px);border-radius:8px}
+.md-x,.md-nav{position:absolute;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.65);color:#fff;font-size:1.6rem;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+.md-x:hover,.md-nav:hover{background:var(--red);border-color:var(--red)}
+.md-x{top:10px;right:10px}
+.md-nav{top:50%;margin-top:-22px}
+.md-nav.prev{left:8px}
+.md-nav.next{right:8px}
+.md-badge{position:absolute;right:12px;bottom:12px;padding:5px 12px;border-radius:99px;background:rgba(0,0,0,.75);border:1px solid #444;font-size:.8rem;font-weight:700}
+.md-thumbs{display:flex;gap:8px;padding:10px 14px;background:#000;overflow-x:auto}
+.md-thumbs button{flex:none;width:56px;height:56px;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:#161616;color:var(--muted);opacity:.65;cursor:pointer}
+.md-thumbs button.on{border-color:var(--red);opacity:1}
+.md-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.md-body{padding:18px 18px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.md-kick{margin:0 0 6px;font:700 .75rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--red-hi)}
+.md-body h3{font-size:clamp(1.3rem,5.5vw,1.8rem);text-transform:uppercase}
+.md-desc{margin:12px 0 0;color:#d0d0d0}
+.md-specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px 20px;margin:16px 0 0;padding:12px 14px;background:#000;border:1px solid var(--line);border-radius:10px}
+.md-specs dt{font:.7rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.md-specs dd{margin:2px 0 0;font-weight:700}
+#md-res{color:var(--red-hi)}
+.md-foot{display:grid;gap:12px;margin-top:18px}
+.md-ig{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border:2px solid #fff;border-radius:8px;background:#000;color:#fff;text-decoration:none;font-weight:700;text-align:center}
+.md-ig:hover{background:#fff;color:#000}
+.md-feat{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;font-size:.95rem}
+.md-feat li{display:flex;gap:10px;align-items:flex-start}
+.md-feat li::before{content:"\2713";flex:none;width:18px;height:18px;margin-top:3px;border:1px solid var(--red);border-radius:50%;color:var(--red-hi);font-size:.65rem;line-height:1;display:grid;place-items:center}
+.md-foot .btn{width:100%}
+.md-pn{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:14px;padding-top:6px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+.md-pn button{min-height:44px;padding:0 4px;background:none;border:0;color:var(--text);font:500 .88rem "DM Sans",sans-serif;cursor:pointer}
+.md-pn button:hover{color:var(--red-hi)}
 .lb-open{overflow:hidden}
+
+/* Servicios */
+.kick{display:flex;align-items:center;gap:8px;margin:0 0 12px;font:700 .78rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--red-hi)}
+.kick::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+.sv-head{display:grid;gap:22px;padding-bottom:28px;margin-bottom:32px;border-bottom:1px solid var(--line)}
+.sv-head h2{font-size:clamp(1.9rem,8vw,3.4rem);text-transform:uppercase}
+.sv-head p{color:var(--muted);margin:14px 0 0;max-width:36rem}
+.sv-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.sv{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.sv-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sv-ico{width:48px;height:48px;flex:none;border:1px solid var(--line);background:#1a1a1a;border-radius:12px;display:grid;place-items:center}
+.sv-tag{font:700 .68rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--red-hi);border:1px solid #5a1612;border-radius:99px;padding:5px 10px;text-align:right}
+.sv h3{font-size:1.3rem;text-transform:uppercase}
+.sv p{margin:0;color:var(--muted)}
+.sv ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.93rem}
+.sv li{display:flex;gap:10px;align-items:flex-start}
+.sv li::before{content:"\2713";flex:none;width:18px;height:18px;margin-top:2px;border:1px solid var(--red);border-radius:50%;color:var(--red-hi);font-size:.65rem;line-height:1;display:grid;place-items:center}
+.sv-foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;font:.7rem ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.sv-foot a{display:inline-flex;align-items:center;min-height:44px;font:700 .88rem "DM Sans",sans-serif;letter-spacing:0;text-transform:none;color:var(--red-hi);text-decoration:none}
+.sv-foot a:hover{text-decoration:underline}
 
 /* ===== Tablet ===== */
 @media(min-width:600px){
@@ -173,11 +218,6 @@ footer.site .wrap{display:grid;gap:8px}
 @media(min-width:860px){
   html{scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
   .bar{height:68px}
-  .menu-btn{display:none}
-  nav{display:flex;position:static;flex-direction:row;align-items:center;gap:26px;padding:0;border:0;background:none}
-  nav a{min-height:0;border:0;font-size:.95rem;color:var(--muted)}
-  nav a:hover{color:var(--text)}
-  nav a.cta-s{margin:0;color:#fff;padding:10px 18px}
   .hero::before{-webkit-mask-image:linear-gradient(100deg,transparent 40%,#000 100%);mask-image:linear-gradient(100deg,transparent 40%,#000 100%)}
   .hero h1{font-size:clamp(4rem,9vw,7rem)}
   .hero p{font-size:1.2rem}
@@ -189,6 +229,16 @@ footer.site .wrap{display:grid;gap:8px}
 @media(min-width:600px){.g-grid{columns:3;column-gap:14px}.g-item{margin-bottom:14px}.chips{margin:0 0 24px;padding:0;flex-wrap:wrap;overflow:visible}}
 @media(min-width:960px){.g-grid{columns:4}}
 @media(min-width:860px){.hero.has-video .hero-media::after{background:linear-gradient(90deg,rgba(0,0,0,.85),rgba(0,0,0,.35))}}
+@media(min-width:520px){.md-foot{display:flex;gap:12px}.md-foot .btn,.md-foot .md-ig{flex:1;width:auto}}
+@media(min-width:720px){.sv-head{grid-template-columns:1fr auto;align-items:end}.sv-head .btn{width:auto}}
+@media(min-width:960px){.sv-grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+@media(min-width:1000px){
+  .menu-btn{display:none}
+  nav{display:flex;position:static;flex-direction:row;align-items:center;gap:24px;padding:0;border:0;background:none}
+  nav a{min-height:0;border:0;font-size:.95rem;color:var(--muted)}
+  nav a:hover{color:var(--text)}
+  nav a.cta-s{margin:0;color:#fff;padding:10px 18px}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-btn span,.g-item img{transition:none}}
 </style>
 </head>
@@ -201,6 +251,7 @@ footer.site .wrap{display:grid;gap:8px}
     <nav id="nav" aria-label="Principal">
       <a href="#catalogo">Catálogo</a>
       <a href="#galeria">Galería</a>
+      <a href="#servicios">Servicios</a>
       <a href="#como">Cómo funciona</a>
       <a href="#empresas">Empresas</a>
       <a href="#resenas">Reseñas</a>
@@ -291,6 +342,42 @@ footer.site .wrap{display:grid;gap:8px}
     </div>
   </section>
 
+  <section id="servicios">
+    <div class="wrap">
+      <div class="sv-head">
+        <div>
+          <p class="kick">Capacidades del taller</p>
+          <h2>Servicios de fabricación</h2>
+          <p>Dominamos todo el ciclo: desde la conceptualización geométrica y el modelado 3D hasta la impresión técnica y el acabado final artesanal.</p>
+        </div>
+        <a class="btn" href="#contacto" data-item="consultar un proyecto"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:8px"><path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/></svg>Consultar proyecto</a>
+      </div>
+      <div class="sv-grid">
+        <article class="sv">
+          <div class="sv-top"><span class="sv-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ff2a1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M10 9l-2 3 2 3M14 9l2 3-2 3"/></svg></span><span class="sv-tag">.STL &amp; .STEP</span></div>
+          <h3>Impresión directa de archivos</h3>
+          <p>Envíanos tus archivos 3D directamente. Analizamos la orientación de capas, la geometría y la resistencia mecánica óptima para fabricarlo con máxima precisión.</p>
+          <ul><li>Compatibilidad nativa con .STL, .STEP, .OBJ y .3MF</li><li>Optimización de soportes y tolerancias dimensionales</li><li>Fabricación en FDM técnico o Resina UV de alta resolución</li></ul>
+          <div class="sv-foot"><span>01 • Botella impresiones</span><a href="#contacto" data-item="imprimir directamente mis archivos 3D">Pedir presupuesto &rarr;</a></div>
+        </article>
+        <article class="sv">
+          <div class="sv-top"><span class="sv-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ff2a1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><path d="M2 2l7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></span><span class="sv-tag">Desde idea o croquis</span></div>
+          <h3>Diseño 3D y modelado a medida</h3>
+          <p>¿Tienes una idea en mente, un boceto a lápiz o una pieza rota que necesitas clonar? Diseñamos el modelo 3D desde cero pensando en su fabricación física.</p>
+          <ul><li>Modelado paramétrico técnico e ingeniería inversa</li><li>Escultura orgánica para personajes, trofeos y atrezzo</li><li>Estructuración interna para aligerar peso o aumentar rigidez</li></ul>
+          <div class="sv-foot"><span>02 • Botella impresiones</span><a href="#contacto" data-item="diseño 3D y modelado a medida">Pedir presupuesto &rarr;</a></div>
+        </article>
+        <article class="sv">
+          <div class="sv-top"><span class="sv-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ff2a1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></span><span class="sv-tag">10 a 500 unidades</span></div>
+          <h3>Producción de series cortas</h3>
+          <p>Evita los desorbitados costes de los moldes de inyección tradicionales. Fabricamos lotes medianos y pequeños con repetibilidad garantizada en nuestra granja de impresión.</p>
+          <ul><li>Sin inversión previa en utillajes ni matrices</li><li>Modificaciones entre lotes sin coste adicional</li><li>Granja multimáquina trabajando en paralelo</li></ul>
+          <div class="sv-foot"><span>03 • Botella impresiones</span><a href="#contacto" data-item="una producción de series cortas">Pedir presupuesto &rarr;</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section id="como">
     <div class="wrap">
       <div class="head"><h2>Cómo funciona</h2></div>
@@ -337,7 +424,7 @@ footer.site .wrap{display:grid;gap:8px}
         <p>Rellena el formulario y te respondemos con una propuesta y un precio. Sirve tanto para encargos personales como para empresas.</p>
         <ul class="direct">
           <li>WhatsApp: <a id="wa-link" href="#">escríbenos</a></li>
-          <li>Instagram: <a href="#">@botellaimpresiones</a></li>
+          <li>Instagram: <a id="ig-link" href="#">@botellaimpresiones</a></li>
         </ul>
       </div>
       <form id="f">
@@ -370,17 +457,45 @@ footer.site .wrap{display:grid;gap:8px}
   </div>
 </footer>
 
-<dialog id="lb" aria-label="Galería ampliada">
-  <button class="lb-x" type="button" data-a="x" aria-label="Cerrar">&times;</button>
-  <button class="lb-nav prev" type="button" data-a="p" aria-label="Anterior">&lsaquo;</button>
-  <figure id="lb-fig"></figure>
-  <button class="lb-nav next" type="button" data-a="n" aria-label="Siguiente">&rsaquo;</button>
-  <div class="lb-info"><p id="lb-cap" style="margin:0"></p><span id="lb-count"></span></div>
+<dialog id="lb" aria-labelledby="md-title">
+  <div class="md-scroll" id="md-scroll">
+    <div class="md-stage" id="md-stage">
+      <button class="md-x" type="button" data-a="x" aria-label="Cerrar">&times;</button>
+      <button class="md-nav prev" type="button" data-a="p" aria-label="Foto anterior">&lsaquo;</button>
+      <figure id="md-fig"></figure>
+      <button class="md-nav next" type="button" data-a="n" aria-label="Foto siguiente">&rsaquo;</button>
+      <span class="md-badge" id="md-badge" hidden></span>
+    </div>
+    <div class="md-thumbs" id="md-thumbs" hidden></div>
+    <div class="md-body">
+      <p class="md-kick" id="md-kick"></p>
+      <h3 id="md-title"></h3>
+      <p class="md-desc" id="md-desc" hidden></p>
+      <dl class="md-specs" id="md-specs" hidden>
+        <div id="md-mat-w"><dt>Material</dt><dd id="md-mat"></dd></div>
+        <div id="md-res-w"><dt>Resolución de capa</dt><dd id="md-res"></dd></div>
+      </dl>
+      <ul class="md-feat" id="md-feat" hidden></ul>
+      <div class="md-foot">
+        <a class="md-ig" id="md-ig" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span id="md-ig-t">Ver en Instagram</span></a>
+        <button class="btn" type="button" data-a="ask">Pedir pieza similar</button>
+      </div>
+      <div class="md-pn" id="md-pn">
+        <button type="button" data-a="pp">&lsaquo; Pieza anterior</button>
+        <span id="md-pos"></span>
+        <button type="button" data-a="pn">Pieza siguiente &rsaquo;</button>
+      </div>
+    </div>
+  </div>
 </dialog>
 
 <script>
 // Cambia aquí el número (con prefijo país, sin + ni espacios) antes de compartir la web
 var WHATSAPP = "34600000000";
+// Cambia aquí tu perfil de Instagram
+var INSTAGRAM = "https://instagram.com/botellaimpresiones";
+// Características que salen en todas las piezas que no tengan las suyas (campo feat)
+var DEFAULT_FEAT = ["Fabricada por encargo","Tamaño, color y acabado a tu gusto","Se puede entregar pintada o lista para pintar"];
 
 var $ = function(id){ return document.getElementById(id); };
 
@@ -390,16 +505,21 @@ var HERO_VIDEO = { src: "./sources/banner.mp4", poster: "" };
 // Galería · t: "img" o "vid" · cat: mascotas | llaveros | hogar | empresas · r: proporción ancho/alto
 // src: archivo grande · thumb: miniatura ligera (opcional) · poster: portada del vídeo (opcional)
 // Los elementos sin src se ven como hueco de ejemplo.
+// Campos opcionales para el modal de cada pieza:
+//   more:["./sources/ARMA1b.jpg","./sources/ARMA1c.jpg"]  fotos extra (el modal las muestra con miniaturas)
+//   tag:"Cosplay y atrezzo"  texto pequeño sobre el título (si no, usa el nombre de la categoría)
+//   desc:"Descripción de la pieza"   mat:"PETG Oro"   res:"0.12 mm"   ig:"https://instagram.com/p/..."
+// Ejemplo: {t:"img",cat:"armas",r:"3/4",alt:"HACHA DE GUERRA",src:"./sources/ARMA1.jpg",more:["./sources/ARMA1b.jpg"],desc:"...",mat:"PETG",res:"0.12 mm"},
 var MEDIA = [
-  {t:"img",cat:"armas",r:"3/4",alt:"HACHA DE GUERRA", src:"./sources/ARMA1.jpg"},
-  {t:"img",cat:"armas",r:"16/9",alt:"ARMADURA PECHO Y HOMBROS", src:"./sources/ARMA2.jpg"},
-  {t:"img",cat:"detalles",r:"9/16",alt:"CASCO CON CUERNOS", src:"./sources/DETALLE1.jpg"},
-  {t:"img",cat:"detalles",r:"3/4",alt:"BARCO ONE PIECE", src:"./sources/DETALLE2.jpg"},
-  {t:"img",cat:"armas",r:"1/1",alt:"ESPADA CON FUNDA", src:"./sources/ARMA3.jpg"},
-  {t:"img",cat:"armas",r:"3/4",alt:"ESPADAS DOBLES", src:"./sources/ARMA4.jpg"},
-  {t:"img",cat:"detalles",r:"16/9",alt:"ARMADURA HOMBRO, ANTEBRAZO", src:"./sources/DETALLE3.jpg"},
-  {t:"img",cat:"armas",r:"3/4",alt:"ESPADAS DOBLES 2", src:"./sources/ARMA5.jpg"},
-  {t:"img",cat:"detalles",r:"1/1",alt:"MUÑECO A COLOR", src:"./sources/DETALLE4.jpg"}
+  {t:"img",cat:"armas",r:"3/4",alt:"HACHA DE GUERRA", src:"./sources/ARMA1.jpg", desc:"Réplica de hacha de guerra pensada para cosplay, atrezzo y colección. Detalle en relieve y acabado listo para lucir en eventos, rodajes o exposición."},
+  {t:"img",cat:"armas",r:"16/9",alt:"ARMADURA PECHO Y HOMBROS", src:"./sources/ARMA2.jpg", desc:"Conjunto de armadura con peto y hombreras para cosplay y fiestas. Diseñado para ajustarse al cuerpo y mantener el máximo detalle con el menor peso posible."},
+  {t:"img",cat:"detalles",r:"9/16",alt:"CASCO CON CUERNOS", src:"./sources/DETALLE1.jpg", desc:"Casco con cuernos hecho a medida para cosplay y eventos. Volumen escultórico y ligero para poder llevarlo durante horas."},
+  {t:"img",cat:"detalles",r:"3/4",alt:"BARCO ONE PIECE", src:"./sources/DETALLE2.jpg", desc:"Barco inspirado en One Piece como pieza de decoración y coleccionismo, con detalle en casco y mástiles."},
+  {t:"img",cat:"armas",r:"1/1",alt:"ESPADA CON FUNDA", src:"./sources/ARMA3.jpg", desc:"Espada con su funda a juego, pensada para cosplay y atrezzo. Conjunto completo para lucir en eventos."},
+  {t:"img",cat:"armas",r:"3/4",alt:"ESPADAS DOBLES", src:"./sources/ARMA4.jpg", desc:"Pareja de espadas para cosplay y atrezzo, a juego y con el mismo acabado."},
+  {t:"img",cat:"detalles",r:"16/9",alt:"ARMADURA HOMBRO, ANTEBRAZO", src:"./sources/DETALLE3.jpg", desc:"Hombrera y antebrazo de armadura para completar tu disfraz, con detalle en relieve y ajuste a medida."},
+  {t:"img",cat:"armas",r:"3/4",alt:"ESPADAS DOBLES 2", src:"./sources/ARMA5.jpg", desc:"Segunda pareja de espadas dobles para cosplay y atrezzo, con diseño y acabado a juego."},
+  {t:"img",cat:"detalles",r:"1/1",alt:"MUÑECO A COLOR", src:"./sources/DETALLE4.jpg", desc:"Figura a color impresa en 3D, personalizable en tamaño y acabado. Ideal como regalo o pieza de colección."}
 ];
 
 // ======== Vídeo del banner ========
@@ -435,7 +555,7 @@ var MEDIA = [
 (function(){
   var BATCH = 12, items = [], shown = 0, cat = "todo", cur = 0, opener = null, pushed = false;
   var grid = $("g-grid"), moreBtn = $("g-more"), count = $("g-count"), empty = $("g-empty"), chips = $("g-chips");
-  var dlg = $("lb"), fig = $("lb-fig"), cap = $("lb-cap"), num = $("lb-count"), io = null;
+  var dlg = $("lb"), stage = $("md-stage"), fig = $("md-fig"), badge = $("md-badge"), thumbs = $("md-thumbs"), kick = $("md-kick"), title = $("md-title"), desc = $("md-desc"), specs = $("md-specs"), mat = $("md-mat"), matW = $("md-mat-w"), res = $("md-res"), resW = $("md-res-w"), ig = $("md-ig"), pos = $("md-pos"), pn = $("md-pn"), scroller = $("md-scroll"), feat = $("md-feat"), igt = $("md-ig-t"), pv = dlg.querySelector('[data-a="p"]'), nx = dlg.querySelector('[data-a="n"]'), pi = 0, after = null, io = null;
 
   function ph(m){ var d = document.createElement("div"); d.className = "ph"; d.textContent = m.alt; return d; }
 
@@ -446,6 +566,7 @@ var MEDIA = [
     var s = m.t === "vid" ? m.poster : (m.thumb || m.src);
     if(s){ var im = new Image(); im.loading = "lazy"; im.decoding = "async"; im.alt = ""; im.src = s; b.appendChild(im); }
     else b.appendChild(ph(m));
+    if(m.t === "img" && m.more && m.more.length){ var c = document.createElement("span"); c.className = "cnt"; c.textContent = (m.more.length + 1) + " fotos"; b.appendChild(c); }
     if(m.t === "vid"){
       var p = document.createElement("span"); p.className = "play";
       p.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>';
@@ -482,51 +603,94 @@ var MEDIA = [
     reset();
   });
 
-  // --- Visor ---
+  // --- Modal de pieza ---
+  function photos(m){ return [m.src].concat(m.more || []); }
+  function label(m){ if(m.tag) return m.tag; var b = chips.querySelector('button[data-c="' + m.cat + '"]'); return b ? b.textContent : m.cat; }
   function stop(){ var v = fig.querySelector("video"); if(v){ v.pause(); v.removeAttribute("src"); v.load(); } }
-  function media(m){
-    if(!m.src){ var d = ph(m); d.style.aspectRatio = m.r; return d; }
+  function media(m, src){
+    if(!src){ var d = ph(m); d.style.aspectRatio = m.r; return d; }
     if(m.t === "vid"){
       var v = document.createElement("video");
       v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = "metadata";
       if(m.poster) v.poster = m.poster;
-      v.src = m.src; return v;
+      v.src = src; return v;
     }
-    var im = new Image(); im.decoding = "async"; im.alt = m.alt; im.src = m.src; return im;
+    var im = new Image(); im.decoding = "async"; im.alt = m.alt; im.src = src; return im;
   }
-  function show(i){
+  function photo(k){
+    var m = items[cur], list = photos(m), n = list.length; pi = (k + n) % n;
+    stop(); fig.textContent = ""; fig.appendChild(media(m, list[pi]));
+    badge.hidden = n < 2; badge.textContent = "Foto " + (pi + 1) + " de " + n;
+    pv.hidden = nx.hidden = n < 2;
+    thumbs.querySelectorAll("button").forEach(function(b, j){ b.classList.toggle("on", j === pi); });
+    if(n > 1 && m.t === "img"){ var s = list[(pi + 1) % n]; if(s) new Image().src = s; }
+  }
+  function piece(i){
     var n = items.length; cur = (i + n) % n;
-    var m = items[cur]; stop(); fig.textContent = ""; fig.appendChild(media(m));
-    cap.textContent = m.alt; num.textContent = (cur + 1) + " / " + n;
-    [cur + 1, cur - 1].forEach(function(k){ var x = items[(k + n) % n]; if(x && x.t === "img" && x.src) new Image().src = x.src; });
+    var m = items[cur], list = photos(m);
+    thumbs.textContent = ""; thumbs.hidden = list.length < 2;
+    if(list.length > 1) list.forEach(function(s, k){
+      var b = document.createElement("button"); b.type = "button"; b.dataset.a = "t"; b.dataset.k = k;
+      b.setAttribute("aria-label", "Ver foto " + (k + 1));
+      if(s && m.t === "img"){ var im = new Image(); im.alt = ""; im.loading = "lazy"; im.src = (k === 0 && m.thumb) || s; b.appendChild(im); }
+      else b.textContent = k + 1;
+      thumbs.appendChild(b);
+    });
+    kick.textContent = label(m); title.textContent = m.alt;
+    desc.textContent = m.desc || "Pieza fabricada en impresión 3D por encargo. Cuéntanos qué necesitas y te preparamos una igual o a tu medida."; desc.hidden = false;
+    mat.textContent = m.mat || "A consultar"; res.textContent = m.res || "A consultar"; specs.hidden = false;
+    var fl = m.feat || DEFAULT_FEAT; feat.textContent = "";
+    fl.forEach(function(t){ var li = document.createElement("li"); li.textContent = t; feat.appendChild(li); }); feat.hidden = !fl.length;
+    ig.href = m.ig || INSTAGRAM; igt.textContent = m.ig ? "Ver este post en Instagram" : "Ver en Instagram";
+    pos.textContent = "Pieza " + (cur + 1) + " de " + n; pn.hidden = n < 2;
+    scroller.scrollTop = 0;
+    photo(0);
+  }
+  function step(d){ if(photos(items[cur]).length > 1) photo(pi + d); else piece(cur + d); }
+  function go(a, k){
+    var m = items[cur];
+    if(a === "x") dlg.close();
+    else if(a === "p") photo(pi - 1);
+    else if(a === "n") photo(pi + 1);
+    else if(a === "t") photo(+k);
+    else if(a === "pp") piece(cur - 1);
+    else if(a === "pn") piece(cur + 1);
+    else if(a === "ask"){
+      pushed = false; try{ history.replaceState(null, ""); }catch(err){}
+      after = function(){ $("detalle").value = "Quiero una pieza similar a: " + m.alt + "."; $("contacto").scrollIntoView(); };
+      dlg.close();
+    }
   }
   grid.addEventListener("click", function(e){
     var b = e.target.closest(".g-item"); if(!b) return;
-    opener = b; show(+b.dataset.i);
+    opener = b; piece(+b.dataset.i);
     if(!dlg.open) dlg.showModal();
     document.documentElement.classList.add("lb-open");
     try{ history.pushState({lb:1}, ""); pushed = true; }catch(err){}
   });
   dlg.addEventListener("close", function(){
     stop(); fig.textContent = ""; document.documentElement.classList.remove("lb-open");
-    if(opener) opener.focus();
+    if(opener) opener.focus({preventScroll:true});
     if(pushed){ pushed = false; try{ history.back(); }catch(err){} }
+    if(after){ var f = after; after = null; setTimeout(f, 60); }
   });
   window.addEventListener("popstate", function(){ if(dlg.open){ pushed = false; dlg.close(); } });
   dlg.addEventListener("click", function(e){
-    var a = e.target.closest("button"); a = a ? a.dataset.a : (e.target === dlg || e.target === fig ? "x" : null);
-    if(a === "x") dlg.close(); else if(a === "p") show(cur - 1); else if(a === "n") show(cur + 1);
+    var b = e.target.closest("button[data-a]");
+    if(b) return go(b.dataset.a, b.dataset.k);
+    var r = dlg.getBoundingClientRect();
+    if(e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dlg.close();
   });
   dlg.addEventListener("keydown", function(e){
-    if(e.key === "ArrowLeft") show(cur - 1); else if(e.key === "ArrowRight") show(cur + 1);
+    if(e.key === "ArrowLeft") step(-1); else if(e.key === "ArrowRight") step(1);
   });
   var x0 = null;
-  fig.addEventListener("pointerdown", function(e){ x0 = e.target.tagName === "VIDEO" ? null : e.clientX; });
-  fig.addEventListener("pointerup", function(e){
+  stage.addEventListener("pointerdown", function(e){ x0 = e.target.closest("button,video") ? null : e.clientX; });
+  stage.addEventListener("pointerup", function(e){
     if(x0 === null) return; var d = e.clientX - x0; x0 = null;
-    if(Math.abs(d) > 50) show(cur + (d < 0 ? 1 : -1));
+    if(Math.abs(d) > 50) step(d < 0 ? 1 : -1);
   });
-  fig.addEventListener("pointercancel", function(){ x0 = null; });
+  stage.addEventListener("pointercancel", function(){ x0 = null; });
 
   reset();
 })();
@@ -537,10 +701,11 @@ var MEDIA = [
   btn.addEventListener("click", function(){ menu(!nav.classList.contains("open")); });
   nav.addEventListener("click", function(e){ if(e.target.tagName === "A") menu(false); });
   document.addEventListener("keydown", function(e){ if(e.key === "Escape") menu(false); });
-  window.addEventListener("resize", function(){ if(window.innerWidth >= 860) menu(false); });
+  window.addEventListener("resize", function(){ if(window.innerWidth >= 1000) menu(false); });
 })();
 (function(){
   var f = document.getElementById("f"), who = document.getElementById("who"), emp = document.getElementById("emp"), det = document.getElementById("detalle");
+  $("ig-link").href = INSTAGRAM;
   document.getElementById("wa-link").href = "https://wa.me/" + WHATSAPP;
 
   function sync(){ emp.hidden = who.value !== "empresa"; }
